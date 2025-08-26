@@ -1,5 +1,5 @@
 from django.contrib import admin
 
-from habits.models import Habits
+from habits.models import Habit
 
-admin.site.register(Habits)
+admin.site.register(Habit)

@@ -3,14 +3,14 @@ from datetime import timedelta
 
 from location_field.models.plain import PlainLocationField
 
-from users.models import Users
+from users.models import User
 
 
-class Habits(models.Model):
-    """Модель 'Привычки'"""
+class Habit(models.Model):
+    """Модель 'Привычка'"""
 
     user = models.ForeignKey(
-        Users,
+        User,
         max_length=30,
         help_text="Выберите пользователя",
         on_delete=models.CASCADE,
@@ -18,12 +18,14 @@ class Habits(models.Model):
     )
     place = models.CharField(
         max_length=255,
-        help_text='Введите название места',
-        verbose_name="Место"
+        verbose_name="Место",
+        help_text="Введите название места"
     )
     map = PlainLocationField(
-        based_fields=['city'],
+        based_fields=['place'],
         zoom=7,
+        null=True,
+        blank=True,
         verbose_name="Карта и координаты"
     )
     time = models.DateTimeField(

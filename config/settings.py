@@ -38,6 +38,8 @@ INSTALLED_APPS = [
 
 LOCATION_FIELD = {
     'provider.openstreetmap.max_zoom': 18,
+    'map.center.automatic': True,
+    'search.provider': 'nominatim',
 }
 
 MIDDLEWARE = [
@@ -126,4 +128,4 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'users.Users'
+AUTH_USER_MODEL = 'users.User'
