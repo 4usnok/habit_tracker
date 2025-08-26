@@ -37,8 +37,7 @@ INSTALLED_APPS = [
 ]
 
 LOCATION_FIELD = {
-    'provider.openstreetmap.max_zoom': 18,
-    'map.center.automatic': True,
+    'map.provider': 'openstreetmap',
     'search.provider': 'nominatim',
 }
 
