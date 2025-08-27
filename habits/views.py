@@ -10,11 +10,11 @@ class MyView(APIView):
 
     def get(self, request):
         queryset = Habit.objects.all()
-        paginator = self.pagination_class()  # Создаем экземпляр пагинатора
-        paginated_queryset = paginator.paginate_queryset(
-            queryset, request
-        )  # Пагинируем queryset
-        serializer = HabitSerializer(paginated_queryset, many=True)  # Сериализируем
-        return paginator.get_paginated_response(
-            serializer.data
-        )  # Возвращаем пагинированный ответ
+        # Создаем экземпляр пагинатора
+        paginator = self.pagination_class()
+        # Пагинируем queryset
+        paginated_queryset = paginator.paginate_queryset(queryset, request)
+        # Сериализируем
+        serializer = HabitSerializer(paginated_queryset, many=True)
+        # Возвращаем пагинированный ответ
+        return paginator.get_paginated_response(serializer.data)
