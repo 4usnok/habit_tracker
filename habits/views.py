@@ -4,7 +4,7 @@ from rest_framework.views import APIView
 from habits.models import Habit
 from habits.pagination import HabitPagination
 from habits.permissions import IsOwner
-from habits.serializers import HabitSerializer
+from habits.serializers import HabitValidSerializer, HabitSerializer
 
 
 class MyView(APIView):
@@ -27,7 +27,7 @@ class ListPrivateAPIViewPermissions(generics.ListAPIView):
     """Просмотр списка привычек владельца"""
 
     queryset = Habit.objects.all()
-    serializer_class = HabitSerializer
+    serializer_class = HabitValidSerializer
     pagination_class = HabitPagination
     permission_classes = [permissions.IsAuthenticated]
 
@@ -38,7 +38,12 @@ class ListPublicAPIViewPermissions(generics.ListAPIView):
     """Просмотр публичного списка владельца"""
 
     queryset = Habit.objects.all()
-    serializer_class = HabitSerializer
+    serializer_class = HabitValidSerializer
+    permission_classes = [
+        permissions.IsAuthenticated
+
+    ]
+    pagination_class = HabitPagination
 
     def get_queryset(self):
         return Habit.objects.filter(is_public=True)
@@ -47,7 +52,7 @@ class CreateAPIViewPermissions(generics.ListCreateAPIView):
     """Создание постов"""
 
     queryset = Habit.objects.all()
-    serializer_class = HabitSerializer
+    serializer_class = HabitValidSerializer
     permission_classes = [permissions.IsAuthenticated]
 
     def perform_create(self, serializer):
@@ -57,19 +62,20 @@ class RetrieveAPIViewPermissions(generics.RetrieveAPIView):
     """Пользователь имеет право просматривать только свои посты"""
 
     queryset = Habit.objects.all()
-    serializer_class = HabitSerializer
+    serializer_class = HabitValidSerializer
     permission_classes = [IsOwner, permissions.IsAuthenticated]  # Применение пользовательского разрешения
 
 class UpdateAPIViewPermissions(generics.UpdateAPIView):
     """Пользователь имеет право редактировать только свои посты"""
 
     queryset = Habit.objects.all()
-    serializer_class = HabitSerializer
+    serializer_class = HabitValidSerializer
     permission_classes = [IsOwner, permissions.IsAuthenticated]  # Применение пользовательского разрешения
 
 class DestroyAPIViewPermissions(generics.DestroyAPIView):
     """Пользователь имеет право удалять только свои посты"""
 
     queryset = Habit.objects.all()
-    serializer_class = HabitSerializer
+    serializer_class = HabitValidSerializer
     permission_classes = [IsOwner, permissions.IsAuthenticated]  # Применение пользовательского разрешения
+

@@ -1,5 +1,4 @@
 from rest_framework import serializers
-
 from habits.models import Habit
 from habits.validators import (FillTimeValidator,
                                NumberOfHabitsCompletedValidator,
@@ -8,7 +7,9 @@ from habits.validators import (FillTimeValidator,
                                RewardOrRelatedHabitValidator)
 
 
-class HabitSerializer(serializers.ModelSerializer):
+class HabitValidSerializer(serializers.ModelSerializer):
+    """Сериализатор для валидации КРУД"""
+
     class Meta:
         model = Habit
         fields = "__all__"
@@ -19,3 +20,10 @@ class HabitSerializer(serializers.ModelSerializer):
             PleasantHabitValidator(),
             NumberOfHabitsCompletedValidator(),
         ]
+
+class HabitSerializer(serializers.ModelSerializer):
+    """Сериализатор для привычки"""
+
+    class Meta:
+        model = Habit
+        fields = "__all__"
