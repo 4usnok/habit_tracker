@@ -1,7 +1,12 @@
+from typing import Optional
+
+from packaging.utils import _
 from rest_framework import generics
 from rest_framework.decorators import api_view, permission_classes
+from rest_framework.exceptions import AuthenticationFailed
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from rest_framework_simplejwt.authentication import AUTH_HEADER_TYPE_BYTES
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 from users.models import User
@@ -16,6 +21,7 @@ class CreateUser(generics.CreateAPIView):
 
     def perform_create(self, serializer):
         user = serializer.save(is_active=True)
+        user.save()
 
 class UsersListAPIView(generics.ListAPIView):
     """Просмотр списка пользователей"""
