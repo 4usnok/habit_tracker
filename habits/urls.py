@@ -1,7 +1,11 @@
+from habits.apps import HabitsConfig
 from habits.views import (ListPrivateAPIViewPermissions, ListPublicAPIViewPermissions, CreateAPIViewPermissions,
                           RetrieveAPIViewPermissions, UpdateAPIViewPermissions, DestroyAPIViewPermissions,
-                          MyTokenObtainPairView)
+                          )
 from django.urls import path
+
+app_name = HabitsConfig.name
+
 
 urlpatterns = [
 path('private_habits/', ListPrivateAPIViewPermissions.as_view(), name='private-habits'),
