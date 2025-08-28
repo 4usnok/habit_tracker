@@ -9,9 +9,14 @@ from users.models import User
 class Habit(models.Model):
     """Модель 'Привычка'"""
 
+    owner = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        verbose_name="Владелец",
+        help_text="Выберите владельца"
+    )
     user = models.ForeignKey(
         User,
-        max_length=30,
         help_text="Выберите пользователя",
         on_delete=models.CASCADE,
         verbose_name="Пользователь",
