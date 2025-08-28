@@ -14,14 +14,14 @@ class Habit(models.Model):
         help_text="Владелец объекта",
         on_delete=models.CASCADE,
         verbose_name="Владелец",
-        related_name="habits_as_owner"  # Уникальное имя для обратной связи
+        related_name="owners"  # Уникальное имя для обратной связи
     )
     user = models.ForeignKey(
         User,
         help_text="Выберите пользователя",
         on_delete=models.CASCADE,
         verbose_name="Пользователь",
-        related_name="habits_as_user"  # Уникальное имя для обратной связи
+        related_name="users"  # Уникальное имя для обратной связи
     )
     place = models.CharField(
         max_length=255, verbose_name="Место", help_text="Введите название места"
