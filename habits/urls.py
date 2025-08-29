@@ -3,6 +3,8 @@ from habits.views import (ListPrivateAPIViewPermissions, ListPublicAPIViewPermis
                           RetrieveAPIViewPermissions, UpdateAPIViewPermissions, DestroyAPIViewPermissions,
                           )
 from django.urls import path
+from . import views
+
 
 app_name = HabitsConfig.name
 

@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "location_field.apps.DefaultConfig",
     "rest_framework_simplejwt",
+    'celery',
 
     "habits",
     "users",
@@ -141,3 +142,16 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = "users.User"
+
+TELEGRAM_URL = os.getenv("TELEGRAM_URL")
+BOT_TOKEN = os.getenv("BOT_TOKEN")
+
+# settings from celery
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+CELERY_TIMEZONE = "Europe/Moscow"
+CELERY_TASK_TRACK_STARTED = True
+CELERY_TASK_TIME_LIMIT = 30 * 60
+
+CELERY_WORKER_POOL = 'solo'
+
