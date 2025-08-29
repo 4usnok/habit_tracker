@@ -1,9 +1,10 @@
+from django.views.decorators.csrf import csrf_exempt
+
 from habits.apps import HabitsConfig
 from habits.views import (ListPrivateAPIViewPermissions, ListPublicAPIViewPermissions, CreateAPIViewPermissions,
                           RetrieveAPIViewPermissions, UpdateAPIViewPermissions, DestroyAPIViewPermissions,
                           )
 from django.urls import path
-from . import views
 
 
 app_name = HabitsConfig.name
