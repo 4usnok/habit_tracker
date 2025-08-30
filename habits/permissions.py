@@ -1,5 +1,6 @@
 from rest_framework import permissions
 
+
 class IsOwner(permissions.BasePermission):
     """Пользовательское разрешение, разрешающее владельцу только доступ."""
 

@@ -1,10 +1,12 @@
 from rest_framework import serializers
 from habits.models import Habit
-from habits.validators import (FillTimeValidator,
-                               NumberOfHabitsCompletedValidator,
-                               PleasantHabitInRelatedHabitValidator,
-                               PleasantHabitValidator,
-                               RewardOrRelatedHabitValidator)
+from habits.validators import (
+    FillTimeValidator,
+    NumberOfHabitsCompletedValidator,
+    PleasantHabitInRelatedHabitValidator,
+    PleasantHabitValidator,
+    RewardOrRelatedHabitValidator,
+)
 
 
 class HabitValidSerializer(serializers.ModelSerializer):
@@ -20,6 +22,7 @@ class HabitValidSerializer(serializers.ModelSerializer):
             PleasantHabitValidator(),
             NumberOfHabitsCompletedValidator(),
         ]
+
 
 class HabitSerializer(serializers.ModelSerializer):
     """Сериализатор для привычки"""

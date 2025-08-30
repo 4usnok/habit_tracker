@@ -1,13 +1,18 @@
 from django.urls import path
 
 from users.apps import UserConfig
-from users.views import CreateUser, MyTokenObtainPairView, RetrieveUserAPIView, UsersListAPIView
+from users.views import (
+    CreateUser,
+    MyTokenObtainPairView,
+    RetrieveUserAPIView,
+    UsersListAPIView,
+)
 
 app_name = UserConfig.name
 
 urlpatterns = [
-    path('', UsersListAPIView.as_view(), name='list-users'),
-    path('retrieve/<int:pk>/', RetrieveUserAPIView.as_view(), name='retrieve-user'),
-    path('register/', CreateUser.as_view(), name='register-user'),
-    path('token/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path("", UsersListAPIView.as_view(), name="list-users"),
+    path("retrieve/<int:pk>/", RetrieveUserAPIView.as_view(), name="retrieve-user"),
+    path("register/", CreateUser.as_view(), name="register-user"),
+    path("token/", MyTokenObtainPairView.as_view(), name="token_obtain_pair"),
 ]
