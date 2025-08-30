@@ -23,7 +23,7 @@ def start_message(message):
     markup=types.ReplyKeyboardMarkup(resize_keyboard=True)
     item1=types.KeyboardButton("Информация о привычках")
     markup.add(item1)
-    bot.send_message(message.chat.id,'Здравствуйте! Выберите что вам надо:', reply_markup=markup)
+    bot.send_message(message.chat.id,'Здравствуйте! Выберите необходимую для вас функцию', reply_markup=markup)
 
 @bot.message_handler(func=lambda message: message.text == "Информация о привычках")
 def habits_info(message):
