@@ -85,27 +85,3 @@ class DestroyAPIViewPermissions(generics.DestroyAPIView):
     permission_classes = [IsOwner, permissions.IsAuthenticated]  # Применение пользовательского разрешения
 
 
-@csrf_exempt
-def telegram_webhook(request):
-    print("Webhook вызван!")
-    if request.method == 'POST':
-        # Получаем данные от Telegram
-        update = json.loads(request.body)
-
-        # Проверяем, есть ли сообщение с текстом
-        if 'message' in update and 'text' in update['message']:
-            text = update['message']['text']  # Текст сообщения
-            chat_id = update['message']['chat']['id']  # ID чата
-
-            # Проверяем, что пользователь написал именно /start
-            if text == '/start':
-                print("Пользователь написал /start!")
-                # Запускаем задачу в очередь
-                get_info.delay(
-                    action="Приветствие",
-                    time="сейчас",
-                    email="kakas@gmail.com"
-                )
-
-        return JsonResponse({'status': 'ok'})
-    return JsonResponse({'status': 'error'}, status=400)
