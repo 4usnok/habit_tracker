@@ -47,9 +47,10 @@ def handle_message(message):
             return
         response = f"📃 Информация о привычках пользователя {user.email}: \n\n"
         for habit in habits:
-            response += f"🎯 {habit.action or 'Не указано'}\n"
+            response += f"🎯 {habit.action}\n"
             response += f"🕐 время: {habit.time} \n"
-            response += f"✅ выполнить: {habit.action} \n\n"
+            response += f"🗺 место: {habit.place} \n"
+            response += f"🎁 вознаграждение: {habit.reward} \n\n"
         bot.reply_to(
             message, response
         )
