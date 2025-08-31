@@ -50,7 +50,7 @@ def handle_message(message):
             response += f"🎯 {habit.action}\n"
             response += f"🕐 время: {habit.time} \n"
             response += f"🗺 место: {habit.place} \n"
-            response += f"🎁 вознаграждение: {habit.reward} \n\n"
+            response += f"🎁 вознаграждение: {habit.reward if habit.reward else "Нет вознаграждения"} \n\n"
         bot.reply_to(
             message, response
         )
