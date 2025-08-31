@@ -33,7 +33,7 @@ class Habit(models.Model):
         blank=True,
         verbose_name="Карта и координаты",
     )
-    time = models.DateTimeField(
+    time = models.TimeField(
         max_length=30, help_text="Укажите время", verbose_name="Время"
     )
     action = models.CharField(
