@@ -49,7 +49,7 @@ class ListPublicAPIViewPermissions(generics.ListAPIView):
 
 
 class CreateAPIViewPermissions(generics.ListCreateAPIView):
-    """Создание постов"""
+    """Создание привычки"""
 
     queryset = Habit.objects.all()
     serializer_class = HabitValidSerializer
@@ -60,7 +60,7 @@ class CreateAPIViewPermissions(generics.ListCreateAPIView):
 
 
 class RetrieveAPIViewPermissions(generics.RetrieveAPIView):
-    """Пользователь имеет право просматривать только свои посты"""
+    """Пользователь имеет право просматривать только свои привычки"""
 
     queryset = Habit.objects.all()
     serializer_class = HabitValidSerializer
@@ -71,7 +71,7 @@ class RetrieveAPIViewPermissions(generics.RetrieveAPIView):
 
 
 class UpdateAPIViewPermissions(generics.UpdateAPIView):
-    """Пользователь имеет право редактировать только свои посты"""
+    """Пользователь имеет право редактировать только свои привычки"""
 
     queryset = Habit.objects.all()
     serializer_class = HabitValidSerializer
@@ -82,7 +82,7 @@ class UpdateAPIViewPermissions(generics.UpdateAPIView):
 
 
 class DestroyAPIViewPermissions(generics.DestroyAPIView):
-    """Пользователь имеет право удалять только свои посты"""
+    """Пользователь имеет право удалять только свои привычки"""
 
     queryset = Habit.objects.all()
     serializer_class = HabitValidSerializer

@@ -1,5 +1,3 @@
-from django.views.decorators.csrf import csrf_exempt
-
 from habits.apps import HabitsConfig
 from habits.views import (
     ListPrivateAPIViewPermissions,

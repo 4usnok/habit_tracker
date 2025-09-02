@@ -2,6 +2,8 @@ from datetime import timedelta
 
 from django.core.exceptions import ValidationError
 
+from habits.models import Habit
+
 
 class RewardOrRelatedHabitValidator:
     """
@@ -38,9 +40,6 @@ class PleasantHabitInRelatedHabitValidator:
     """
 
     def __call__(self, attrs):
-        sign_of_a_pleasant_habit = attrs.get(
-            "sign_of_a_pleasant_habit"
-        )  # приятная привычка
         related_habit = attrs.get("related_habit")  # связная привычка
         if related_habit:  # если существует связная привычка
             if (
