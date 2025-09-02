@@ -147,6 +147,7 @@ class MyAPITestCase(APITestCase):
             serializer.is_valid(raise_exception=True)
 
     def test_create_habit_with_reward_and_related_habit(self):
+        """Тестирование создания привычки"""
         data = {
             "periodicity": "06:39:39",
             "time_to_complete": "01:01:01",
