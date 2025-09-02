@@ -1,12 +1,18 @@
 from datetime import timedelta
+from urllib.parse import urlparse
 
+import responses
 from rest_framework import status
 from rest_framework.exceptions import ValidationError
+from django.test import override_settings
 
 from rest_framework.test import APITestCase
 
+from config import settings
 from habits.models import Habit
 from habits.serializers import HabitValidSerializer
+from habits.services import send_tg_message
+from habits.tasks import get_info
 from users.models import User
 
 
@@ -198,3 +204,34 @@ class MyAPITestCase(APITestCase):
                                                                  " и поле вознаграждения,"
                                                                  " и поле связанной привычки. Можно заполнить только"
                                                                  " одно из двух полей.")
+
+    @override_settings(BOT_TOKEN="test_token")  # подменяем токен
+    @responses.activate
+    def test_send_tg_message(self):
+        """Тестирование сервисной функции"""
+        responses.add(
+            responses.POST,
+            'https://api.telegram.org/bot/test_token/sendMessage',
+            json={'key': 'value'},
+            status=200)
+        send_tg_message(1, "hello")
+
+        # проверка попыток запроса
+        assert len(responses.calls) == 1
+        request = responses.calls[0].request
+
+        # Проверка результата
+        parsed = urlparse(request.url)
+        assert parsed.scheme == 'https'
+        assert parsed.netloc == 'api.telegram.org'
+        assert parsed.path == '/bot/test_token/sendMessage'
+
+    def test_get_info(self):
+        """Тестирование асинхронной задачи"""
+        user = User.objects.create(email='test_mail@example.com', tg_chat_id=None)
+        result = get_info(user.email)
+        assert result == {
+            'status': 'error',
+            'message': 'У пользователя нет привычек',
+            'email': user.email
+        }

@@ -77,6 +77,6 @@ class Habit(models.Model):
         return self.action
 
     class Meta:
-        ordering = ["action", "related_habit", "user", "place", "time"]
+        ordering = ["action", "place", "time"]
         verbose_name = "Привычка"
         verbose_name_plural = "Привычки"
