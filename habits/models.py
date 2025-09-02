@@ -43,13 +43,15 @@ class Habit(models.Model):
         help_text="Укажите, является ли данная привычка приятной",
         verbose_name="Приятная привычка",
     )
-    related_habit = models.CharField(
-        max_length=200,
+    related_habit = models.ForeignKey(
+        "self",
         verbose_name="Связанная привычка",
         help_text="Название связанной приятной привычки",
         null=True,
         blank=True,
+        on_delete=models.SET_NULL
     )
+
     periodicity = models.DurationField(
         help_text="Укажите период времени в формате ЧЧ:ММ:СС",
         verbose_name="Период",
