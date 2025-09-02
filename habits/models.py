@@ -49,7 +49,7 @@ class Habit(models.Model):
         help_text="Название связанной приятной привычки",
         null=True,
         blank=True,
-        on_delete=models.SET_NULL
+        on_delete=models.SET_NULL,
     )
 
     periodicity = models.DurationField(

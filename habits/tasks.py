@@ -12,9 +12,9 @@ def get_info(email):
     habit = Habit.objects.filter(user=user).first()
     if not habit:
         return {
-            'status': 'error',
-            'message': 'У пользователя нет привычек',
-            'email': email
+            "status": "error",
+            "message": "У пользователя нет привычек",
+            "email": email,
         }
     # формируем сообщение
     message = f"Время для действия {habit.action}: {habit.time}"
@@ -23,8 +23,8 @@ def get_info(email):
         send_tg_message(user.tg_chat_id, message)
 
     return {
-        'action': habit.action,
-        'time': str(habit.time),
-        'email': user.email,
-        'message_sent': bool(user.tg_chat_id)
+        "action": habit.action,
+        "time": str(habit.time),
+        "email": user.email,
+        "message_sent": bool(user.tg_chat_id),
     }

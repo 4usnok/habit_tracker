@@ -2,8 +2,6 @@ from datetime import timedelta
 
 from django.core.exceptions import ValidationError
 
-from habits.models import Habit
-
 
 class RewardOrRelatedHabitValidator:
     """
