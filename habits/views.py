@@ -1,4 +1,5 @@
 from rest_framework import generics, permissions
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 
 from habits.models import Habit
@@ -31,6 +32,7 @@ class ListPrivateAPIViewPermissions(generics.ListAPIView):
     serializer_class = HabitValidSerializer
     pagination_class = HabitPagination
     permission_classes = [permissions.IsAuthenticated]
+
 
     def get_queryset(self):
         return Habit.objects.filter(owner=self.request.user)
