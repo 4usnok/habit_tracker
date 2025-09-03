@@ -18,8 +18,11 @@ from users.models import User
 class MyAPITestCase(APITestCase):
     def setUp(self):
         self.user = User.objects.create(
-            email="test@example.com", password="testpassword"
+            email="test@example.com",
         )
+        # Хэширование пароля
+        self.user.set_password("testpassword")
+        self.user.save()
         # Аутентифицируем клиента
         self.client.force_authenticate(user=self.user)
 
