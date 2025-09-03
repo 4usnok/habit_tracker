@@ -17,8 +17,8 @@ from users.models import User
 
 class MyAPITestCase(APITestCase):
     def setUp(self):
-        self.user = User.objects.create_user(
-            username="testuser", email="test@example.com", password="testpassword"
+        self.user = User.objects.create(
+            email="test@example.com", password="testpassword"
         )
         # Аутентифицируем клиента
         self.client.force_authenticate(user=self.user)
