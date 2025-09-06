@@ -1,11 +1,11 @@
 from django.core.management import BaseCommand
 
-from users.models import Users
+from users.models import User
 
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
-        user = Users.objects.create(email="kakas@gmail.com", username="kakas")
+        user = User.objects.create(email="kakas@gmail.com", username="kakas")
         user.is_staff = True
         user.is_active = True
         user.is_superuser = True
