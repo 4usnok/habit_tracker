@@ -96,3 +96,6 @@ poetry install
 * Запуск обработчика очереди (worker) для получения задач и их выполнения: `celery -A config worker -l INFO`
 * Запуск redis-server: `./redis-server.exe`
 * Запуск redis-cli: `./redis-cli.exe`
+* Сборка контейнера: `docker build -t habit_tracker-app .`
+* Просмотр образов: `docker images`
+* Удаление висячих образов: `docker image prune`
