@@ -5,7 +5,8 @@ on: [push, pull_request] # события, которые происходят
 jobs:
   test:
     runs-on: ubuntu-latest
-    env:
+
+    env: # переменные окружения и секреты
       BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
       HOST: ${{ secrets.HOST }}
       NAME_DB: ${{ secrets.NAME_DB }}
@@ -15,7 +16,13 @@ jobs:
       SECRET_KEY: ${{ secrets.SECRET_KEY }}
       TELEGRAM_URL: ${{ secrets.TELEGRAM_URL }}
       USER: ${{ secrets.USER }}
+      SERVER_IP: ${{ secrets.SERVER_IP }}
+      DEPLOY_DIR: ${{ secrets.DEPLOY_DIR }}
+      SSH_KEY: ${{ secrets.SSH_KEY }}
       DEBUG: ${{ secrets.DEBUG }}
+      DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
+      DOCKER_HUB_ACCESS_TOKEN : ${{ secrets.DOCKER_HUB_ACCESS_TOKEN  }}
+
 
     services:
       postgres: # PostgreSQL
@@ -54,3 +61,39 @@ jobs:
 
       - name: Run tests # запуск тестирования
         run: poetry run python manage.py test
+
+  build:
+    runs-on: ubuntu-latest
+    needs: test
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      - name: Log in in Docker hub # аутентификация в Docker hub
+        run: echo ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }} | docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} --password-stdin
+
+      - name: Build Docker image # сборка образа
+        run: docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/myapp:${{ github.sha }} .
+
+      - name: Push Docker image in Docker hub # загрузка образа
+        run: docker push ${{ secrets.DOCKER_HUB_USERNAME }}/myapp:${{ github.sha }}
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Setup SSH # настройка SSH-подключения
+        uses: webfactory/ssh-agent@v0.0.1
+        with:
+          github_token: ${{ secrets.SSH_KEY }}
+
+      - name: Deploy to Server
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }} << 'EOF'
+            docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/myapp:${{ github.sha }}
+            docker stop myapp || true
+            docker rm myapp || true
+            docker run -d --name myapp -p 80:8000 ${{ secrets.DOCKER_HUB_USERNAME }}/myapp:${{ github.sha }}
+          EOF
