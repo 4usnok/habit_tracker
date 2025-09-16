@@ -23,8 +23,6 @@ jobs:
       DEBUG: ${{ secrets.DEBUG }}
       DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
       DOCKER_HUB_ACCESS_TOKEN : ${{ secrets.DOCKER_HUB_ACCESS_TOKEN  }}
-      SSH_KEY_PASSPHRASE: ${{ secrets.SSH_KEY_PASSPHRASE }}
-
 
     services:
       postgres: # PostgreSQL
@@ -91,7 +89,6 @@ jobs:
         uses: webfactory/ssh-agent@v0.8.0
         with:
           ssh-private-key: ${{ secrets.SSH_KEY }}
-          ssh-passphrase: ${{ secrets.SSH_KEY_PASSPHRASE }}
 
       - name: Deploy to Server # деплой на сервер
         run: |
