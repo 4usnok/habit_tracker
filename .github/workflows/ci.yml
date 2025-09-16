@@ -33,7 +33,7 @@ jobs:
           pip install poetry
 
       - name: Install dependencies # установка зависимостей
-        run: poetry install --no-interaction
+        run: poetry install --no-interaction --no-root
 
       - name: Run migrate # запуск миграций
         run: poetry run python manage.py migrate
