@@ -17,6 +17,20 @@ jobs:
       USER: ${{ secrets.USER }}
       DEBUG: ${{ secrets.DEBUG }}
 
+    services:
+      postgres: # PostgreSQL
+        image: postgres:14
+        env:
+          POSTGRES_DB: ${{ secrets.NAME_DB }}
+          POSTGRES_USER: ${{ secrets.USER }}
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+        ports:
+          - 5432:5432
+
+      redis: # Redis
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
 
     steps:
       - name: Check out code
