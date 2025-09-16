@@ -85,7 +85,7 @@ jobs:
 
     steps:
       - name: Setup SSH # настройка SSH-подключения
-        uses: webfactory/ssh-agent@v0.0.1
+        uses: webfactory/ssh-agent@v0.8.0
         with:
           github_token: ${{ secrets.SSH_KEY }}
 
