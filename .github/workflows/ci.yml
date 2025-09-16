@@ -87,9 +87,9 @@ jobs:
       - name: Setup SSH # настройка SSH-подключения
         uses: webfactory/ssh-agent@v0.8.0
         with:
-          github_token: ${{ secrets.SSH_KEY }}
+          ssh-private-key: ${{ secrets.SSH_KEY }}
 
-      - name: Deploy to Server
+      - name: Deploy to Server # деплой на сервер
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }} << 'EOF'
             docker pull ${{ secrets.DOCKER_HUB_USERNAME }}/myapp:${{ github.sha }}
