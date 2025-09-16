@@ -15,7 +15,6 @@ services:
       db:
         condition: service_healthy
 
-
   db:
     image: postgres:16.0 # образ
     env_file: # переменные окружения
