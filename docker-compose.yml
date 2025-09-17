@@ -15,6 +15,17 @@ services:
       db:
         condition: service_healthy
 
+  nginx:
+    build:
+      context: ./nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - static_volume:/app/staticfiles
+    depends_on:
+      - web
+
   db:
     image: postgres:16.0 # образ
     env_file: # переменные окружения
@@ -28,6 +39,13 @@ services:
       interval: 30s # интервал между проверками
       timeout: 10s # время ожидания команды
       retries: 5 # количество попыток
+
+  redis:
+    image: redis:7
+    volumes:
+      - redis_data:/data
+    env_file:
+      - ./.env
 
 networks:
   default:
