@@ -80,6 +80,7 @@ jobs:
         run: docker push ${{ secrets.DOCKER_HUB_USERNAME }}/myapp:${{ github.sha }}
 
   deploy:
+
     runs-on: ubuntu-latest
     needs: build
 
