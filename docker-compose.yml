@@ -49,5 +49,7 @@ networks:
   default:
 
 volumes:
-  postgres_data:
+  redis_data:
   static_volume:
+  media_volume:
+  postgres_data:
