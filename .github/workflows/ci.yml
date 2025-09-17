@@ -19,7 +19,7 @@ jobs:
       SSH_USER: ${{secrets.SSH_USER}}
       SERVER_IP: ${{ secrets.SERVER_IP }}
       DEPLOY_DIR: ${{ secrets.DEPLOY_DIR }}
-      SSH_KEY: ${{ secrets.SSH_KEY }}
+      SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
       DEBUG: ${{ secrets.DEBUG }}
       DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
       DOCKER_HUB_ACCESS_TOKEN : ${{ secrets.DOCKER_HUB_ACCESS_TOKEN  }}
@@ -87,7 +87,7 @@ jobs:
       - name: Setup SSH # настройка SSH-подключения
         uses: webfactory/ssh-agent@v0.8.0
         with:
-          ssh-private-key: ${{ secrets.SSH_KEY }}
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
       - name: Deploy to Server # деплой на сервер
         run: |
