@@ -2,10 +2,6 @@ name: Django CI
 
 on: [push, pull_request] # события, которые происходят
 
-concurrency:
-  group: ${{ github.workflow }}-${{ github.base_ref || github.ref }}
-  cancel-in-progress: true
-
 jobs:
   test:
     runs-on: ubuntu-latest
