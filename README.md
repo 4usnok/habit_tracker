@@ -181,7 +181,7 @@ username -> это никнейм ВМ
 
 Если у нас произошли какие-то проблемы с репозиторием, то используем команды:
 1. Удаление репозитория:
-`rm -rf ~/Project_5_Habit_tracker`
+`rm -rf ~/Project_5_Habit_tracker` или `sudo rm -rf ~/Project_5_Habit_tracker`
 2. Клонируем заново:
 `git clone https://github.com/4usnok/Project_5_Habit_tracker.git`
 
