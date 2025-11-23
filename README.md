@@ -8,7 +8,7 @@ LMS-система, в которой каждый желающий может �
 # Инструкция по установке и использованию разработанного функционала приложения
 1. Клонируйте репозиторий:
 ```
-git clone https://github.com/4usnok/Project_5_Habit_tracker.git
+git clone https://github.com/4usnok/habit_tracker.git
 ```
 2. Активируйте виртуальное окружение poetry:
 ```
@@ -151,7 +151,7 @@ username -> это никнейм ВМ
 1.234.567.89 -> это публичный IPv4
 
 Шаг 2. Клонирование репозитория:
-команда -> `git clone https://github.com/4usnok/Project_5_Habit_tracker.git`
+команда -> `git clone https://github.com/4usnok/habit_tracker.git`
 
 Шаг 3. Права доступа
 Настройка прав пользователя иногда может потребоваться и она состоит из следующих шагов:
@@ -182,9 +182,9 @@ username -> это никнейм ВМ
 
 Если у нас произошли какие-то проблемы с репозиторием, то используем команды:
 1. Удаление репозитория:
-`rm -rf ~/Project_5_Habit_tracker` или `sudo rm -rf ~/Project_5_Habit_tracker`
+`rm -rf ~/habit_tracker.git` или `sudo rm -rf ~/habit_tracker.git`
 2. Клонируем заново:
-`git clone https://github.com/4usnok/Project_5_Habit_tracker.git`
+`git clone https://github.com/4usnok/habit_tracker.git`
 
 # Деплой по методу CI/CD
 Деплой по методу CI/CD осуществляется на гитхабе во вкладке Actions, настройки сервера и 
